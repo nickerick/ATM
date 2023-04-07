@@ -31,6 +31,32 @@ public class DataAccess {
         return acc;
     }
 
+    public static void setCheckingAccount(CheckingAccount acc) {
+        JSONParser parser = new JSONParser();
+        
+        try {
+           String filePath = new File("").getAbsolutePath();
+           Object obj = parser.parse(new FileReader(filePath + "/src/database.json"));
+           JSONObject database = (JSONObject)obj;
+
+           JSONObject writeData = new JSONObject();
+           writeData.put("balance", acc.getBalance());
+           writeData.put("amountWithdrawn", acc.getAmountWithdrawn());
+
+           database.put("checkingAccount", writeData);
+
+           try (FileWriter file = new FileWriter("./src/database.json")) {
+                file.write(database.toJSONString());
+                file.flush();
+           } catch(Exception e) {
+            e.printStackTrace();
+           }
+
+        } catch(Exception e) {
+           e.printStackTrace();
+        }
+    }
+
     public static SavingsAccount getSavingsAccount() {
         SavingsAccount acc = new SavingsAccount();
         JSONParser parser = new JSONParser();
@@ -48,6 +74,32 @@ public class DataAccess {
         }
 
         return acc;
+    }
+
+    public static void setSavingsAccount(SavingsAccount acc) {
+        JSONParser parser = new JSONParser();
+        
+        try {
+           String filePath = new File("").getAbsolutePath();
+           Object obj = parser.parse(new FileReader(filePath + "/src/database.json"));
+           JSONObject database = (JSONObject)obj;
+
+           JSONObject writeData = new JSONObject();
+           writeData.put("balance", acc.getBalance());
+           writeData.put("amountWithdrawn", acc.getAmountWithdrawn());
+
+           database.put("savingsAccount", writeData);
+
+           try (FileWriter file = new FileWriter("./src/database.json")) {
+                file.write(database.toJSONString());
+                file.flush();
+           } catch(Exception e) {
+            e.printStackTrace();
+           }
+
+        } catch(Exception e) {
+           e.printStackTrace();
+        }
     }
 
     public static UtilityAccount getUtilityAccount() {
@@ -69,6 +121,29 @@ public class DataAccess {
         }
 
         return dayNum;
+    }
+
+    public static void setDayNum(long newDay) {
+        JSONParser parser = new JSONParser();
+        
+        try {
+           String filePath = new File("").getAbsolutePath();
+           Object obj = parser.parse(new FileReader(filePath + "/src/database.json"));
+           JSONObject database = (JSONObject)obj;
+
+           JSONObject writeData = new JSONObject();
+           database.put("dayNum", newDay);
+
+           try (FileWriter file = new FileWriter("./src/database.json")) {
+                file.write(database.toJSONString());
+                file.flush();
+           } catch(Exception e) {
+            e.printStackTrace();
+           }
+
+        } catch(Exception e) {
+           e.printStackTrace();
+        }
     }
 
 

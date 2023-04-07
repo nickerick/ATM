@@ -1,6 +1,6 @@
 public class CheckingAccount {
-    private long balance;
-    private long amountWithdrawn;
+    public long balance;
+    public long amountWithdrawn;
 
     public long getBalance() {
         return this.balance;
