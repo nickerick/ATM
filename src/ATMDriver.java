@@ -8,6 +8,13 @@ public class ATMDriver {
         User user = new User();
 
         System.out.println("Starting Application");
+        CheckingAccount checkAcc = DataAccess.getCheckingAccount();
+        SavingsAccount saveAcc = DataAccess.getSavingsAccount();
+        
+        // TESTS TO CHECK VALUES
+        System.out.println(checkAcc.getBalance() + " " + checkAcc.getAmountWithdrawn());
+        System.out.println(saveAcc.getBalance() + " " + saveAcc.getAmountWithdrawn());
+        // DataAccess.getDayNum();
 
         while(true){
             System.out.println("Please Select A Action Below:");

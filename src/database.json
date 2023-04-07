@@ -1,12 +1,14 @@
 {
     "checkingAccount": {
-
+        "balance": 40,
+        "amountWithdrawn": 500
     },
     "savingsAccount": {
-
+        "balance": 30,
+        "amountWithdrawn": 303
     },
     "utilityAccount": {
 
     },
-    "dayNum": 1
+    "dayNum": 5
 }
