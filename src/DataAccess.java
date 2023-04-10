@@ -24,6 +24,7 @@ public class DataAccess {
            JSONObject holder = (JSONObject) jsonObject.get("checkingAccount");
            acc.setBalance((long)holder.get("balance"));
            acc.setAmountWithdrawn(((long)holder.get("amountWithdrawn")));
+           acc.setAmountDepo(((long)holder.get("amountDepo")));
         } catch(Exception e) {
            e.printStackTrace();
         }
@@ -42,6 +43,7 @@ public class DataAccess {
            JSONObject writeData = new JSONObject();
            writeData.put("balance", acc.getBalance());
            writeData.put("amountWithdrawn", acc.getAmountWithdrawn());
+           writeData.put("amountDepo", acc.getAmountDepo());
 
            database.put("checkingAccount", writeData);
 
@@ -69,6 +71,8 @@ public class DataAccess {
            JSONObject holder = (JSONObject) jsonObject.get("savingsAccount");
            acc.setBalance((long)holder.get("balance"));
            acc.setAmountWithdrawn(((long)holder.get("amountWithdrawn")));
+           acc.setAmountDepo(((long)holder.get("amountDepo")));
+           acc.setAmountTransferred((long)holder.get("amountTransfer"));
         } catch(Exception e) {
            e.printStackTrace();
         }
@@ -87,6 +91,8 @@ public class DataAccess {
            JSONObject writeData = new JSONObject();
            writeData.put("balance", acc.getBalance());
            writeData.put("amountWithdrawn", acc.getAmountWithdrawn());
+           writeData.put("amountDepo", acc.getAmountDepo());
+           writeData.put("amountTransfer", acc.getAmountTransferred());
 
            database.put("savingsAccount", writeData);
 

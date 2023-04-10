@@ -1,1 +1,1 @@
-{"utilityAccount":{},"savingsAccount":{"amountWithdrawn":8080,"balance":30},"checkingAccount":{"amountWithdrawn":443,"balance":467},"dayNum":123}
+{"utilityAccount":{},"savingsAccount":{"amountTransfer":0,"amountWithdrawn":0,"amountDepo":0,"balance":819},"checkingAccount":{"amountWithdrawn":124,"amountDepo":224,"balance":13},"dayNum":124}
