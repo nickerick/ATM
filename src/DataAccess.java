@@ -152,5 +152,53 @@ public class DataAccess {
         }
     }
 
+    public static Bill[] getBills() {
+      Bill[] bills = new Bill[4];
+      JSONParser parser = new JSONParser();
+      
+      try {
+         String filePath = new File("").getAbsolutePath();
+         Object obj = parser.parse(new FileReader(filePath + "/src/database.json"));
+         JSONObject jsonObject = (JSONObject)obj;
+         
+         JSONArray holder = (JSONArray) jsonObject.get("bills");
+         for (int i = 0; i < holder.size(); i++) {
+            JSONObject temp = (JSONObject)holder.get(i);
+            Bill tempBill = new Bill();
+            tempBill.setPayAmount((long)temp.get("payAmount"));
+            tempBill.setPayDate((long)temp.get("payDate"));
+            tempBill.setPayStatus((boolean)temp.get("payStatus"));
+         
+            bills[i] = tempBill;
+         }
+
+      } catch(Exception e) {
+         e.printStackTrace();
+      }
+
+      return bills;
+  }
+
+  public static void setBills(Bill[] bills) {
+      JSONParser parser = new JSONParser();
+      
+      try {
+         String filePath = new File("").getAbsolutePath();
+         Object obj = parser.parse(new FileReader(filePath + "/src/database.json"));
+         JSONObject database = (JSONObject)obj;
+
+         database.put("bills", bills);
+
+         try (FileWriter file = new FileWriter("./src/database.json")) {
+              file.write(database.toJSONString());
+              file.flush();
+         } catch(Exception e) {
+          e.printStackTrace();
+         }
+
+      } catch(Exception e) {
+         e.printStackTrace();
+      }
+  }
 
 }

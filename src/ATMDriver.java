@@ -16,6 +16,7 @@ public class ATMDriver {
         // TESTS TO CHECK VALUES
         // System.out.println(checkAcc.getBalance() + " " + checkAcc.getAmountWithdrawn());
         // System.out.println(saveAcc.getBalance() + " " + saveAcc.getAmountWithdrawn());
+        // System.out.println(DataAccess.getBills()[3].getPayAmount() + " " + DataAccess.getBills()[3].getPayDate() + " " + DataAccess.getBills()[3].getPayStatus());
         
         checkAcc.setAmountWithdrawn(443);
         DataAccess.setCheckingAccount(checkAcc);
@@ -56,7 +57,7 @@ public class ATMDriver {
                         System.out.print("Input: ");
                         subMenuSelect = scan.nextInt();
                         System.out.println();
-                        if (menuSelect < 1 || menuSelect > 5) {
+                        if (subMenuSelect < 1 || subMenuSelect > 5) {
                             System.out.println("Invalid Input");
                         } else {
                             break;
@@ -106,6 +107,8 @@ public class ATMDriver {
 
                         if ((checkAcc.getAmountWithdrawn() + withdraw) > 500) {
                             System.out.println("Can only withdraw " + (500 - checkAcc.getAmountWithdrawn()) + " more today into Checking.");    
+                        } else if(checkAcc.getBalance() - withdraw < 0) {
+                            System.out.println("Cannot withdraw " + withdraw + ". You only have " + checkAcc.getBalance() + ".");    
                         } else {
                             System.out.println(withdraw + " successfully withdrawn from Checking.\n");
                             checkAcc.setBalance(checkAcc.getBalance() - withdraw);
@@ -146,7 +149,35 @@ public class ATMDriver {
                     System.out.println();
                 }
             } else if (menuSelect == 2) {
+                while(true){
+                    System.out.println("Please Select Utility Account Action Below:");
+                    System.out.println("1: Check Payment History");
+                    System.out.println("2: Pay Upcoming Bill");
+                    System.out.println("3: Exit");
 
+                    while(true) {
+                        System.out.print("Input: ");
+                        subMenuSelect = scan.nextInt();
+                        System.out.println();
+                        if (subMenuSelect < 1 || subMenuSelect > 3) {
+                            System.out.println("Invalid Input");
+                        } else {
+                            break;
+                        }
+                    }
+
+                    if (subMenuSelect == 1) {
+                        Bill[] pastBills = DataAccess.getBills();
+                        for (Bill bill : pastBills) {
+                            System.out.println("Past Payments:");
+                            System.out.println("Date Paid: " + bill.getPayDate() + ", Amount Paid: " + bill.getPayAmount());
+                        }   
+                    } else if (subMenuSelect == 2) {
+
+                    } else {
+                        break;
+                    }
+                }
             } else if (menuSelect == 3) {
                 dayNum++;
                 checkAcc.setAmountDepo(0);
