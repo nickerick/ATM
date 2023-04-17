@@ -1,3 +1,4 @@
+package atm;
 public class User {
     public SavingsAccount savingsAccount;
     public CheckingAccount checkingAccount;

@@ -1,3 +1,4 @@
+package atm;
 import java.io.*;
 import java.util.*;
 import org.json.simple.*;
@@ -18,7 +19,7 @@ public class DataAccess {
         
         try {
            String filePath = new File("").getAbsolutePath();
-           Object obj = parser.parse(new FileReader(filePath + "/src/database.json"));
+           Object obj = parser.parse(new FileReader(filePath + "/src/atm/database.json"));
            JSONObject jsonObject = (JSONObject)obj;
            
            JSONObject holder = (JSONObject) jsonObject.get("checkingAccount");
@@ -37,7 +38,7 @@ public class DataAccess {
         
         try {
            String filePath = new File("").getAbsolutePath();
-           Object obj = parser.parse(new FileReader(filePath + "/src/database.json"));
+           Object obj = parser.parse(new FileReader(filePath + "/src/atm/database.json"));
            JSONObject database = (JSONObject)obj;
 
            JSONObject writeData = new JSONObject();
@@ -47,7 +48,7 @@ public class DataAccess {
 
            database.put("checkingAccount", writeData);
 
-           try (FileWriter file = new FileWriter("./src/database.json")) {
+           try (FileWriter file = new FileWriter("./src/atm/database.json")) {
                 file.write(database.toJSONString());
                 file.flush();
            } catch(Exception e) {
@@ -65,7 +66,7 @@ public class DataAccess {
         
         try {
            String filePath = new File("").getAbsolutePath();
-           Object obj = parser.parse(new FileReader(filePath + "/src/database.json"));
+           Object obj = parser.parse(new FileReader(filePath + "/src/atm/database.json"));
            JSONObject jsonObject = (JSONObject)obj;
            
            JSONObject holder = (JSONObject) jsonObject.get("savingsAccount");
@@ -85,7 +86,7 @@ public class DataAccess {
         
         try {
            String filePath = new File("").getAbsolutePath();
-           Object obj = parser.parse(new FileReader(filePath + "/src/database.json"));
+           Object obj = parser.parse(new FileReader(filePath + "/src/atm/database.json"));
            JSONObject database = (JSONObject)obj;
 
            JSONObject writeData = new JSONObject();
@@ -96,7 +97,7 @@ public class DataAccess {
 
            database.put("savingsAccount", writeData);
 
-           try (FileWriter file = new FileWriter("./src/database.json")) {
+           try (FileWriter file = new FileWriter("./src/atm/database.json")) {
                 file.write(database.toJSONString());
                 file.flush();
            } catch(Exception e) {
@@ -119,7 +120,7 @@ public class DataAccess {
         
         try {
            String filePath = new File("").getAbsolutePath();
-           Object obj = parser.parse(new FileReader(filePath + "/src/database.json"));
+           Object obj = parser.parse(new FileReader(filePath + "/src/atm/database.json"));
            JSONObject jsonObject = (JSONObject)obj;
            dayNum = (long)jsonObject.get("dayNum");
         } catch(Exception e) {
@@ -134,13 +135,13 @@ public class DataAccess {
         
         try {
            String filePath = new File("").getAbsolutePath();
-           Object obj = parser.parse(new FileReader(filePath + "/src/database.json"));
+           Object obj = parser.parse(new FileReader(filePath + "/src/atm/database.json"));
            JSONObject database = (JSONObject)obj;
 
            JSONObject writeData = new JSONObject();
            database.put("dayNum", newDay);
 
-           try (FileWriter file = new FileWriter("./src/database.json")) {
+           try (FileWriter file = new FileWriter("./src/atm/database.json")) {
                 file.write(database.toJSONString());
                 file.flush();
            } catch(Exception e) {
@@ -158,7 +159,7 @@ public class DataAccess {
       
       try {
          String filePath = new File("").getAbsolutePath();
-         Object obj = parser.parse(new FileReader(filePath + "/src/database.json"));
+         Object obj = parser.parse(new FileReader(filePath + "/src/atm/database.json"));
          JSONObject jsonObject = (JSONObject)obj;
          
          JSONArray holder = (JSONArray) jsonObject.get("bills");
@@ -184,12 +185,12 @@ public class DataAccess {
       
       try {
          String filePath = new File("").getAbsolutePath();
-         Object obj = parser.parse(new FileReader(filePath + "/src/database.json"));
+         Object obj = parser.parse(new FileReader(filePath + "/src/atm/database.json"));
          JSONObject database = (JSONObject)obj;
 
          database.put("bills", bills);
 
-         try (FileWriter file = new FileWriter("./src/database.json")) {
+         try (FileWriter file = new FileWriter("./src/atm/database.json")) {
               file.write(database.toJSONString());
               file.flush();
          } catch(Exception e) {

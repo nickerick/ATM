@@ -1,3 +1,4 @@
+package atm;
 public class Bill {
     private long payDate;
     private long payAmount;

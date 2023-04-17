@@ -1,3 +1,5 @@
+package atm;
+
 import java.util.*;
 
 public class ATMDriver {
@@ -6,9 +8,10 @@ public class ATMDriver {
         Scanner scan = new Scanner(System.in);
         int menuSelect = 0;
         int subMenuSelect = 0;
-        User user = new User();
 
         System.out.println("Starting Application");
+
+        // retrieving user info from data storage
         CheckingAccount checkAcc = DataAccess.getCheckingAccount();
         SavingsAccount saveAcc = DataAccess.getSavingsAccount();
         long dayNum = DataAccess.getDayNum();
@@ -17,13 +20,8 @@ public class ATMDriver {
         // System.out.println(checkAcc.getBalance() + " " + checkAcc.getAmountWithdrawn());
         // System.out.println(saveAcc.getBalance() + " " + saveAcc.getAmountWithdrawn());
         // System.out.println(DataAccess.getBills()[3].getPayAmount() + " " + DataAccess.getBills()[3].getPayDate() + " " + DataAccess.getBills()[3].getPayStatus());
-        
-        checkAcc.setAmountWithdrawn(443);
-        DataAccess.setCheckingAccount(checkAcc);
-        saveAcc.setAmountWithdrawn(8080);
-        DataAccess.setSavingsAccount(saveAcc);
-        DataAccess.setDayNum(123);
 
+        // Main program loop
         while(true){
             System.out.println("Day: " + dayNum);
             System.out.println("Please Select A Action Below:");
@@ -44,7 +42,7 @@ public class ATMDriver {
                 }
             }
 
-            if (menuSelect == 1) {
+            if (menuSelect == 1) { // ATM Access
                 while(true){
                     System.out.println("Please Select ATM Action Below:");
                     System.out.println("1: Check Balance");
@@ -53,6 +51,7 @@ public class ATMDriver {
                     System.out.println("4: Transfer");
                     System.out.println("5: Exit");
 
+                    // Scanning menu select input
                     while(true) {
                         System.out.print("Input: ");
                         subMenuSelect = scan.nextInt();
@@ -64,17 +63,17 @@ public class ATMDriver {
                         }
                     } 
 
-                    if (subMenuSelect == 1) {
+                    if (subMenuSelect == 1) { // Check balance
                         System.out.println("Which account? \n (1) Checking (2) Savings");
                         System.out.print("Input: ");
                         subMenuSelect = scan.nextInt();
 
-                        if (subMenuSelect == 1) {
+                        if (subMenuSelect == 1) { // checking
                             System.out.println("Balance: $" + checkAcc.getBalance());
-                        } else {
+                        } else { // saving
                             System.out.println("Savings: $" + saveAcc.getBalance());
                         }
-                    } else if (subMenuSelect == 2) {
+                    } else if (subMenuSelect == 2) { // Deposit
                         System.out.println("Which account? \n (1) Checking (2) Savings");
                         System.out.print("Input: ");
                         subMenuSelect = scan.nextInt();
@@ -83,7 +82,7 @@ public class ATMDriver {
                         System.out.print("Input: ");
                         int deposit = scan.nextInt();
 
-                        if (subMenuSelect == 1) {
+                        if (subMenuSelect == 1) { // checking logic
                             if ((checkAcc.getAmountDepo() + deposit) > 5000) {
                                 System.out.println("Can only deposit " + (5000 - checkAcc.getAmountDepo()) + " more today into Checking.");    
                             } else {
@@ -91,7 +90,7 @@ public class ATMDriver {
                                 checkAcc.setBalance(checkAcc.getBalance() + deposit);
                                 checkAcc.setAmountDepo(checkAcc.getAmountDepo() + deposit);
                             }
-                        } else {
+                        } else { // savings logic
                             if ((saveAcc.getAmountDepo() + deposit) > 5000) {
                                 System.out.println("Can only deposit " + (5000 - saveAcc.getAmountDepo()) + " more today into Savings.");    
                             } else {
@@ -100,7 +99,7 @@ public class ATMDriver {
                                 saveAcc.setAmountDepo(saveAcc.getAmountDepo() + deposit);
                             }
                         }
-                    } else if (subMenuSelect == 3) {
+                    } else if (subMenuSelect == 3) { // Withdraw
                         System.out.println("How much would you like to withdraw from Checking?");
                         System.out.print("Input: ");
                         int withdraw = scan.nextInt();
@@ -114,7 +113,7 @@ public class ATMDriver {
                             checkAcc.setBalance(checkAcc.getBalance() - withdraw);
                             checkAcc.setAmountDepo(checkAcc.getAmountWithdrawn() + withdraw);
                         }                        
-                    } else if (subMenuSelect == 4) {
+                    } else if (subMenuSelect == 4) { // Transfer
                         System.out.println("Which account would you like to transfer FROM? \n (1) Checking (2) Savings");
                         System.out.print("Input: ");
                         subMenuSelect = scan.nextInt();
@@ -123,7 +122,7 @@ public class ATMDriver {
                         System.out.print("Input: ");
                         int transfer = scan.nextInt();
                         
-                        if (subMenuSelect == 1) {
+                        if (subMenuSelect == 1) { // checking logic
                             if (checkAcc.getBalance() < transfer) {
                                 System.out.println("Cannot transfer more than you have! Checking Balance: " + checkAcc.getBalance());    
                             } else {
@@ -131,7 +130,7 @@ public class ATMDriver {
                                 checkAcc.setBalance(checkAcc.getBalance() - transfer);
                                 saveAcc.setBalance(saveAcc.getBalance() + transfer);
                             }
-                        } else {
+                        } else { // saving logic
                             if (saveAcc.getBalance() < transfer) {
                                 System.out.println("Cannot transfer more than you have! Checking Balance: " + checkAcc.getBalance());    
                             } else if (saveAcc.getAmountTransferred() + transfer > 100) {
@@ -148,13 +147,14 @@ public class ATMDriver {
                     }
                     System.out.println();
                 }
-            } else if (menuSelect == 2) {
+            } else if (menuSelect == 2) { // Utility Menu Access
                 while(true){
                     System.out.println("Please Select Utility Account Action Below:");
                     System.out.println("1: Check Payment History");
                     System.out.println("2: Pay Upcoming Bill");
                     System.out.println("3: Exit");
 
+                    // Scanning menu input select
                     while(true) {
                         System.out.print("Input: ");
                         subMenuSelect = scan.nextInt();
@@ -166,7 +166,7 @@ public class ATMDriver {
                         }
                     }
 
-                    if (subMenuSelect == 1) {
+                    if (subMenuSelect == 1) { // Payment history
                         Bill[] pastBills = DataAccess.getBills();
                         System.out.println("Past Payments:");
                         for (Bill bill : pastBills) {
@@ -175,7 +175,7 @@ public class ATMDriver {
                             }
                         }   
                         System.out.println();
-                    } else if (subMenuSelect == 2) {
+                    } else if (subMenuSelect == 2) { // Pay bill
                         Bill[] pastBills = DataAccess.getBills();
 
                         if (pastBills[3].getPayStatus()) {
@@ -199,11 +199,13 @@ public class ATMDriver {
                             }
                         }
 
+                        DataAccess.setBills(pastBills);
+
                     } else {
                         break;
                     }
                 }
-            } else if (menuSelect == 3) {
+            } else if (menuSelect == 3) { // Increment Day
                 dayNum++;
                 checkAcc.setAmountDepo(0);
                 checkAcc.setAmountWithdrawn(dayNum);
@@ -216,6 +218,7 @@ public class ATMDriver {
         }
         System.out.println("Exiting Application");
 
+        // Saving data to storage before closing
         DataAccess.setCheckingAccount(checkAcc);
         DataAccess.setSavingsAccount(saveAcc);
         DataAccess.setDayNum(dayNum);

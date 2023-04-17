@@ -1,8 +1,8 @@
-public class SavingsAccount {
+package atm;
+public class CheckingAccount {
     private long balance;
     private long amountWithdrawn;
     private long amountDepo;
-    private long amountTransferred;
 
     public long getBalance() {
         return this.balance;
@@ -16,10 +16,6 @@ public class SavingsAccount {
         return this.amountDepo;
     }
 
-    public long getAmountTransferred() {
-        return this.amountTransferred;
-    }
-
     public void setBalance(long bal) {
         this.balance = bal;
     }
@@ -30,9 +26,5 @@ public class SavingsAccount {
 
     public void setAmountDepo(long amount) {
         this.amountDepo = amount;
-    }
-
-    public void setAmountTransferred(long amount) {
-        this.amountTransferred = amount;
     }
 }
