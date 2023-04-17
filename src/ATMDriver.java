@@ -168,11 +168,36 @@ public class ATMDriver {
 
                     if (subMenuSelect == 1) {
                         Bill[] pastBills = DataAccess.getBills();
+                        System.out.println("Past Payments:");
                         for (Bill bill : pastBills) {
-                            System.out.println("Past Payments:");
-                            System.out.println("Date Paid: " + bill.getPayDate() + ", Amount Paid: " + bill.getPayAmount());
+                            if (bill.getPayStatus()) {
+                                System.out.println("Date Paid: " + bill.getPayDate() + ", Amount Paid: " + bill.getPayAmount());
+                            }
                         }   
+                        System.out.println();
                     } else if (subMenuSelect == 2) {
+                        Bill[] pastBills = DataAccess.getBills();
+
+                        if (pastBills[3].getPayStatus()) {
+                            System.out.println("No upcoming bills!");
+                            continue;
+                        }
+
+                        System.out.println("Upcoming Bill:");
+                        System.out.println("Pay Date: " + pastBills[3].getPayDate() + ", Amount Due: " + pastBills[3].getPayAmount());
+                        System.out.println("Would you like to pay this bill? 1: Yes, 2: No"); 
+                        
+                        System.out.print("Input: ");
+                        subMenuSelect = scan.nextInt();
+                        if (subMenuSelect == 1) {
+                            if (pastBills[3].getPayAmount() > checkAcc.getBalance()) {
+                                System.out.println("You don't have enough funds!");
+                            } else {
+                                pastBills[3].setPayStatus(true);
+                                checkAcc.setBalance(checkAcc.getBalance() - pastBills[3].getPayAmount());
+                                System.out.println("Bill successfully paid.");
+                            }
+                        }
 
                     } else {
                         break;
